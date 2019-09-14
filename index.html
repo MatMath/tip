@@ -4,48 +4,93 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
   <title>Tip</title>
-  <STYLE type="text/css">
-    BODY {
-      background-color: #deeaee;
+  <style type="text/css">
+    body {}
+    div.calculator {
+      background: #6b5b95;
+      color: #ffffff;
+      display: flex;
+      font-size: xx-large;
+      flex-wrap: wrap;
+      flex-direction: row;
+      justify-content: space-around;
     }
-    DIV.titleSection {
+    div.calculator div {
+      display: flex;
+      flex-wrap: wrap;
+      flex-direction: row;
+      justify-content: space-around;
+    }
+    div.calculator form {
+      display: block;
+      line-height: 200px;
+    }
+    div.calculator button, input {
+      background-color:rgba(0, 0, 0, 0);
+      color: #ffffff;
+      border: none;
+      outline: none;
+    }
+
+    div.calculator input::placeholder {
+      color: white;
+      opacity: 0.7;
+    }
+    div.receipt {
+      background: #feb236;
       display: flex;
       justify-content: space-around;
     }
-    TABLE.summary {
+    div.receipt table {
       min-width: 400px;
       font-size: xx-large;
     }
-  </STYLE>
+    div.data {
+      background: #ff7b25;
+      display: flex;
+      justify-content: space-around;
+    }
+    div.data ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+    }
+  </style>
 </head>
 <body>
-  <div class="titleSection"><h1>Input receipt value</h1></div>
-  <div id="summary"></div>
-  <div>
-    <input type="number" id="cost">
-    <button class="click-me" title="Calculate">Calculate</button>
+  <div class="calculator">
+    <div>
+      <form>
+        <input type="number" min="10" id="cost" placeholder="Cost (min $10)">
+        <button type="submit" class="click-me" title="Calculate Tip">
+          Calculate Tip
+        </button>
+      </form>
+    </div>
   </div>
-  <hr />
-  <table class="summary">
-    <tbody>
-      <tr><td>Cost</td><td id="costText"></td></tr>
-      <tr><td>Tip</td><td id="tipText"></td></tr>
-      <tr><td>Total</td><td id="totalText"></td></tr>
-    </tbody>
-  </table>
-  <hr />
-  <div id="resultList"></div>
+
+  <div class="receipt">
+    <table>
+      <tbody>
+        <tr><td>Cost:</td><td id="costText"></td></tr>
+        <tr><td>Tip:</td><td id="tipText"></td></tr>
+        <tr><td>Total:</td><td id="totalText"></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div id="resultList" class="data"></div>
 </body>
 <script type="text/javascript">
-  const nbrReverse = (str) => Math.floor(parseFloat(`${str}.${str.split('').reverse().join('')}`)*100)/100; 
+  const nbrReverse = (str) => Math.floor(parseFloat(`${str}.${str.split('').reverse().join('')}`)*100)/100;
 
   const getArrayOfValue = (input) => {
     const val15pc = Math.round(input*1.15*100)/100;
     const val20pc = Math.round(input*1.2*100)/100;
     const min = parseInt(val15pc, 10);
     const max = parseInt(val20pc, 10);
-    
+
     const list = [];
     for (let i = 0; i <= max-min; i++) {
       list.push(nbrReverse(`${min+i}`));
@@ -80,12 +125,12 @@
 
   // Log the clicked element in the console
   const value = parseFloat(document.getElementById('cost').value);
-    
+
   // Too small to be usefull
   if (value < 10) { return; }
   const list = getArrayOfValue(value);
   const keyValueList = createKeyValue(value, list);
-  
+
   generateHTMLList(keyValueList);
   const summary = (keyValueList.length <3)? keyValueList[keyValueList.length - 1] : keyValueList[keyValueList.length - 2];
   generateHTMLSummary(value, summary)
