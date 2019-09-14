@@ -7,10 +7,11 @@
   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
   <title>Tip</title>
   <style type="text/css">
-    body {}
+    body {
+      background: #c1946a;
+    }
     div.calculator {
-      background: #6b5b95;
-      color: #ffffff;
+      background: #3e4444;
       display: flex;
       font-size: xx-large;
       flex-wrap: wrap;
@@ -32,14 +33,16 @@
       color: #ffffff;
       border: none;
       outline: none;
+      text-align: center;
     }
 
     div.calculator input::placeholder {
-      color: white;
+      color: #ffffff;
       opacity: 0.7;
     }
     div.receipt {
-      background: #feb236;
+      background: #82b74b;
+      color: #333333;
       display: flex;
       justify-content: space-around;
     }
@@ -48,7 +51,8 @@
       font-size: xx-large;
     }
     div.data {
-      background: #ff7b25;
+      background: #405d27;
+      color: #ffffff;
       display: flex;
       justify-content: space-around;
     }
@@ -63,7 +67,7 @@
   <div class="calculator">
     <div>
       <form>
-        <input type="number" min="10" id="cost" placeholder="Cost (min $10)">
+        <input autofocus type="number" min="10" id="cost" placeholder="Cost (min $10)">
         <button type="submit" class="click-me" title="Calculate Tip">
           Calculate Tip
         </button>
